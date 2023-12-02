@@ -15,9 +15,31 @@ function App() {
         className="me"
       />
 
-      <h1>Hi, Mayursinh Sarvaiya from Rajkot, India 🇮🇳.</h1>
+      <h2 className="head">
+        Mayursinh Sarvaiya from Rajkot, India 🇮🇳.
+        <br />
+        Now in Halifax, Canada 🇨🇦.
+      </h2>
 
       <div id="my-experience" className="experience">
+        <div>
+          <h2>
+            🎓 Masters Of Applied Computer Science @{' '}
+            <a href="https://www.dal.ca/" target="__blank">
+              Dalhousie University 🇨🇦
+            </a>
+          </h2>
+          - Sept 2023 - Jan 2025
+        </div>
+        <div>
+          <h2>
+            ⏩ Founding Software Engineer (part-time) @{' '}
+            <a href="https://akuity.io" target="__blank">
+              Akuity
+            </a>
+          </h2>
+          - Sept 2023 - Present
+        </div>
         <div>
           <h2>
             ⏩ Founding Software Engineer @{' '}
@@ -25,7 +47,7 @@ function App() {
               Akuity
             </a>
           </h2>
-          - July 2022 - Present
+          - July 2022 - July 2023
         </div>
         <div>
           <h2>
