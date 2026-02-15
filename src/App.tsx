@@ -1,111 +1,119 @@
-import {AiOutlineMail} from 'react-icons/ai';
-import {FaGithub, FaTwitter, FaLinkedin, FaMedium} from 'react-icons/fa';
+import React, { useEffect, useState } from 'react';
+import Hero from './components/Hero';
+import Experience from './components/Experience';
+import Socials from './components/Socials';
 
-import './App.css';
-import MyImage from './assets/mayursinh-sarvaiya.png';
-
-const iconSize = '28px';
+import OSSContributions from './components/OSSContributions';
 
 function App() {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth <= 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
   return (
-    <div className="portfolio">
-      <img
-        src={MyImage}
-        alt="Mayursinh Sarvaiya Profile Picture"
-        className="me"
-      />
-
-      <h2 className="head">
-        Mayursinh Sarvaiya from Rajkot, India 🇮🇳.
-        <br />
-        Now in Halifax, Canada 🇨🇦.
-      </h2>
-
-      <div id="my-experience" className="experience">
-        <div>
-          <h2>
-            🎓 Masters Of Applied Computer Science @{' '}
-            <a href="https://www.dal.ca/" target="__blank">
-              Dalhousie University 🇨🇦
-            </a>
-          </h2>
-          - Sept 2023 - Jan 2025
+    <div className="app-container">
+      <div className="left-pane">
+        <div className="content-wrapper">
+          <Hero />
+          <Socials />
+          
+          <footer className="footer-note fade-in delay-3">
+            <p>&copy; {new Date().getFullYear()} Mayursinh Sarvaiya.</p>
+          </footer>
         </div>
-        <div>
-          <h2>
-            ⏩ Founding Software Engineer (part-time) @{' '}
-            <a href="https://akuity.io" target="__blank">
-              Akuity
-            </a>
-          </h2>
-          - Sept 2023 - Present
-        </div>
-        <div>
-          <h2>
-            ⏩ Founding Software Engineer @{' '}
-            <a href="https://akuity.io" target="__blank">
-              Akuity
-            </a>
-          </h2>
-          - July 2022 - July 2023
-        </div>
-        <div>
-          <h2>
-            ⏩ Software Engineer @{' '}
-            <a href="https://feats.co" target="__blank">
-              Feats
-            </a>
-          </h2>
-          - February 2021 - June 2022
-        </div>
-        <div>
-          <h2>
-            🏫 BE (Computer Engineering) @{' '}
-            <a href="https://www.gtu.ac.in/" target="__blank">
-              GTU
-            </a>
-          </h2>
-          - 2017 - 2021.
+      </div>
+      
+      <div className="right-pane">
+        <div className="scroll-content">
+          <Experience />
+          <OSSContributions />
         </div>
       </div>
 
-      <p id="my-open-source-contributions" className="oss-contributions">
-        I have contributed to{' '}
-        <a href="https://github.com/elastic/eui" target="__blank">
-          elastic/eui
-        </a>
-        ,{' '}
-        <a href="https://github.com/backstage/backstage" target="__blank">
-          backstage
-        </a>{' '}
-        and{' '}
-        <a href="https://github.com/prometheus/prometheus" target="__blank">
-          prometheus
-        </a>{' '}
-        open source projects. Currently I am actively involved in{' '}
-        <a href="https://github.com/argoproj/argo-cd" target="__blank">
-          Argo CD
-        </a>{' '}
-        project.
-      </p>
+      <style>{`
+        .app-container {
+          display: flex;
+          height: 100vh;
+          width: 100%;
+          overflow: hidden;
+        }
+        
+        .left-pane {
+          flex: 1;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          padding: 40px;
+          border-right: 1px solid var(--border-color);
+          background: radial-gradient(circle at top left, #1a1a1a 0%, var(--bg-color) 40%);
+        }
 
-      <div className="footer">
-        <a href="mailto:mayursiinh@gmail.com" target="__blank">
-          <AiOutlineMail size={iconSize} />
-        </a>
-        <a href="https://github.com/Marvin9" target="__blank">
-          <FaGithub size={iconSize} />
-        </a>
-        <a href="https://twitter.com/mayursiinh" target="__blank">
-          <FaTwitter size={iconSize} />
-        </a>
-        <a href="https://www.linkedin.com/in/may-ur/" target="__blank">
-          <FaLinkedin size={iconSize} />
-        </a>
-        <a href="https://mayursinhsarvaiya.medium.com/" target="__blank">
-          <FaMedium size={iconSize} />
-        </a>
-      </div>
+        .content-wrapper {
+          max-width: 500px;
+          width: 100%;
+          text-align: center;
+        }
+        
+        .right-pane {
+          flex: 1.2;
+          height: 100vh;
+          overflow-y: auto;
+          padding: 40px;
+          background: var(--bg-color);
+          position: relative;
+        }
+
+        .scroll-content {
+          max-width: 600px;
+          margin: 0 auto;
+          min-height: 100%;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+        }
+
+        .footer-note {
+          margin-top: 40px;
+          color: var(--text-secondary);
+          font-size: 0.8rem;
+          opacity: 0.5;
+        }
+
+        @media (max-width: 900px) {
+          .app-container {
+            flex-direction: column;
+            height: auto;
+            overflow-y: auto;
+          }
+          
+          .left-pane, .right-pane {
+            flex: none;
+            width: 100%;
+            height: auto;
+            border-right: none;
+            overflow: visible;
+          }
+          
+          .left-pane {
+            padding: 60px 24px 20px;
+            min-height: auto;
+          }
+          
+          .right-pane {
+            padding: 20px 24px 60px;
+          }
+          
+          .scroll-content {
+            display: block;
+          }
+        }
+      `}</style>
     </div>
   );
 }
